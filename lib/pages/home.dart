@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   static const _initialCameraPosition =
-      CameraPosition(target: LatLng(37.773972, -122.431297), zoom: 10);
+      CameraPosition(target: LatLng(3.8609341882766546, 11.520488047821061), zoom: 15, tilt: 50.0);
 
   late GoogleMapController _googleMapController;
   final Marker _origin = Marker(
@@ -34,37 +34,6 @@ class HomePageState extends State<HomePage> {
         await DioService().getData(origin: _origin.position, destination: _destination.position);
     setState(() => _info = directions);
   }
-
-  // Future<void> _addMarker(LatLng pos) async {
-  //   print(pos);
-  //   if ((_origin != null)) {
-  //     setState(() {
-  //       _origin = Marker(
-  //         markerId: const MarkerId('origin'),
-  //         infoWindow: const InfoWindow(title: 'Origin'),
-  //         icon:
-  //             BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-  //         position: pos,
-  //       );
-  //       _destination = null;
-
-  //       _info = null;
-  //     });
-  //   } else {
-  //     setState(() {
-  //       _destination = Marker(
-  //         markerId: const MarkerId('destination'),
-  //         infoWindow: const InfoWindow(title: 'Destination'),
-  //         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-  //         position: pos,
-  //       );
-  //     });
-
-  //     var directions = await DioService()
-  //         .getData(origin: _origin!.position, destination: pos);
-  //     setState(() => _info = directions);
-  //   }
-  // }
 
   @override
   void dispose() {
@@ -89,14 +58,13 @@ class HomePageState extends State<HomePage> {
                 CameraUpdate.newCameraPosition(
                   CameraPosition(
                     target: _origin.position,
-                    zoom: 10.5,
+                    zoom: 15,
                     tilt: 50.0,
                   ),
                 ),
               ),
               style: TextButton.styleFrom(
-                primary: Colors.white,
-                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+                foregroundColor: Colors.white, textStyle: const TextStyle(fontWeight: FontWeight.w600),
               ),
               child: const Text('ORIGIN'),
             ),
@@ -105,14 +73,13 @@ class HomePageState extends State<HomePage> {
                 CameraUpdate.newCameraPosition(
                   CameraPosition(
                     target: _destination.position,
-                    zoom: 10.5,
+                    zoom: 15,
                     tilt: 50.0,
                   ),
                 ),
               ),
               style: TextButton.styleFrom(
-                primary: Colors.white,
-                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+                foregroundColor: Colors.white, textStyle: const TextStyle(fontWeight: FontWeight.w600),
               ),
               child: const Text('DEST'),
             )
@@ -141,7 +108,6 @@ class HomePageState extends State<HomePage> {
                         .toList(),
                   ),
               },
-              // onLongPress: (pos) => _addMarker(pos),
             ),
             if (_info != null)
               Positioned(
